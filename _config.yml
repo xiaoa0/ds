@@ -10,7 +10,7 @@ title: Allie's CSA blog
 description: A place to document my learnings in the AP Computer Science A class
 github_username: xiaoa0
 # you can comment the below line out if your repo name is not different than your baseurl
-github_repo: "fastpages2"
+github_repo: "ds"
 
 # OPTIONAL: override baseurl and url if using a custom domain
 # Note: leave out the trailing / from this value. 
@@ -34,7 +34,7 @@ url: "https://xiaoa0.github.io" # the base hostname & protocol for your site, e.
 #
 # 3. You must replace the parameter `baseurl` in _action_files/settings.ini with the same value as you set here but WITHOUT QUOTES.
 #
-baseurl: "/fastpages2" # the subpath of your site, e.g. "/blog".
+baseurl: "/ds" # the subpath of your site, e.g. "/blog".
 
 # Github and twitter are optional:
 minima:
