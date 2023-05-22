@@ -2,8 +2,8 @@
   
     
         "post0": {
-            "title": "Practice with Pandas, Matplotlib",
-            "content": "import matplotlib.pyplot as plt import numpy as np x = np.linspace(0, 2 * np.pi, 200) y = np.sin(x) fig, ax = plt.subplots() ax.plot(x, y) plt.show() .",
+            "title": "Practice with Pandas, Numpy, Scikit-learn",
+            "content": "import matplotlib.pyplot as plt import numpy as np x = np.linspace(0, 2 * np.pi, 200) y = np.sin(x) fig, ax = plt.subplots() ax.plot(x, y) plt.show() . Following this guide for python . import pandas as pd # setting pd as alias mydataset = { # table data &#39;cars&#39;: [&quot;BMW&quot;, &quot;Volvo&quot;, &quot;Ford&quot;], &#39;passings&#39;: [3, 7, 2] } a = [1, 7, 2] myarray = pd.Series(a) mytable = pd.DataFrame(mydataset) # assigning dataset as table to be printed print(myarray) print(myarray[0]) # indexing print(mytable) . 0 1 1 7 2 2 dtype: int64 1 cars passings 0 BMW 3 1 Volvo 7 2 Ford 2 . import pandas as pd # how to print csv file df = pd.read_csv(&#39;data.csv&#39;) print(df) df = pd.read_json(&#39;data.json&#39;) # how to read json file print(df.to_string()) . NumPy is a library used to manage arrays . import numpy as np arr = np.array([1, 2, 3, 4, 5]) print(arr) # arrays can have any # of dimensions &lt;= 0 arr = np.array([[[1, 2, 3], [4, 5, 6]], [[1, 2, 3], [4, 5, 6]]]) print(arr) print(arr.ndim) # ndim checks dimensions of array print(arr[0, 1]) # index order: row then column . [1 2 3 4 5] [[[1 2 3] [4 5 6]] [[1 2 3] [4 5 6]]] 3 [4 5 6] .",
             "url": "https://xiaoa0.github.io/ds/2023/05/15/pypractice.html",
             "relUrl": "/2023/05/15/pypractice.html",
             "date": " • May 15, 2023"
