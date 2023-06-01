@@ -79,7 +79,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      5 min read
     
 </span></p>
 
@@ -125,13 +125,6 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Project outline courtesy of ChatGPT, code and revisions by xiaoa0</p>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="1.-Install-Required-Libraries">1. Install Required Libraries<a class="anchor-link" href="#1.-Install-Required-Libraries"> </a></h3><p>Ensure that you have the necessary libraries installed. You'll need scikit-learn, numpy, and pandas, which can be installed via pip:</p>
@@ -286,34 +279,34 @@ Note: you may need to restart the kernel to use updated packages.
   </thead>
   <tbody>
     <tr>
-      <th>33490</th>
-      <td>i dont know why you would buy anything else un...</td>
-      <td>pet supplies</td>
-      <td>dogs</td>
+      <th>2594</th>
+      <td>my new baby sat for two whole hours and didnt ...</td>
+      <td>toys games</td>
+      <td>novelty gag toys</td>
     </tr>
     <tr>
-      <th>34087</th>
-      <td>after trying out about 12 different ones i cam...</td>
+      <th>31140</th>
+      <td>this is probably the best blood glucose meter ...</td>
+      <td>health personal care</td>
+      <td>medical supplies equipment</td>
+    </tr>
+    <tr>
+      <th>17172</th>
+      <td>the drakkar fragrance has been around for a ve...</td>
       <td>beauty</td>
       <td>fragrance</td>
     </tr>
     <tr>
-      <th>571</th>
-      <td>i bought these for my 7 year old nephew for ch...</td>
-      <td>toys games</td>
-      <td>electronics for kids</td>
-    </tr>
-    <tr>
-      <th>20015</th>
-      <td>my sons often raid my cabinets for my sushi no...</td>
-      <td>grocery gourmet food</td>
-      <td>snack food</td>
-    </tr>
-    <tr>
-      <th>4134</th>
-      <td>not only is this product actually good for you...</td>
+      <th>18957</th>
+      <td>i paid 70 for the dermanew microdermabrasion s...</td>
       <td>beauty</td>
       <td>skin care</td>
+    </tr>
+    <tr>
+      <th>7105</th>
+      <td>we picked one of these up at a pet store earli...</td>
+      <td>pet supplies</td>
+      <td>cats</td>
     </tr>
     <tr>
       <th>...</th>
@@ -322,34 +315,34 @@ Note: you may need to restart the kernel to use updated packages.
       <td>...</td>
     </tr>
     <tr>
-      <th>263</th>
-      <td>this puzzle is well worth buying as it is quit...</td>
+      <th>17160</th>
+      <td>the boys really enjoyed playing with this it i...</td>
       <td>toys games</td>
-      <td>puzzles</td>
+      <td>dress up pretend play</td>
     </tr>
     <tr>
-      <th>11302</th>
-      <td>this is my first epilator so i dont have much ...</td>
-      <td>health personal care</td>
-      <td>personal care</td>
+      <th>35536</th>
+      <td>this coffee has very good flavor and reminds m...</td>
+      <td>grocery gourmet food</td>
+      <td>beverages</td>
     </tr>
     <tr>
-      <th>21190</th>
-      <td>very cute a little smaller than i expected but...</td>
-      <td>toys games</td>
-      <td>baby toddler toys</td>
-    </tr>
-    <tr>
-      <th>20772</th>
-      <td>works well with or without an ice pack there w...</td>
+      <th>772</th>
+      <td>weve had the gate for about a year set between...</td>
       <td>baby products</td>
-      <td>feeding</td>
+      <td>safety</td>
     </tr>
     <tr>
-      <th>29607</th>
-      <td>straight up youre probably not getting enough ...</td>
-      <td>health personal care</td>
-      <td>nutrition wellness</td>
+      <th>23603</th>
+      <td>bought this mini staircase for my aging kitty ...</td>
+      <td>pet supplies</td>
+      <td>dogs</td>
+    </tr>
+    <tr>
+      <th>17919</th>
+      <td>i like this product it seems to work very well...</td>
+      <td>beauty</td>
+      <td>skin care</td>
     </tr>
   </tbody>
 </table>
@@ -431,29 +424,10 @@ Note: you may need to restart the kernel to use updated packages.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">train_z</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">)</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
-<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">/Users/xiaoa1/VSCode/ds/_notebooks/2023-05-23-NLP.ipynb Cell 14</span> in <span class="ansi-cyan-fg">1
-</span><span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/xiaoa1/VSCode/ds/_notebooks/2023-05-23-NLP.ipynb#X16sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> model = pipeline.fit(train_x, train_y, train_z)
-
-<span class="ansi-red-fg">TypeError</span>: Pipeline.fit() takes from 2 to 3 positional arguments but 4 were given</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -486,9 +460,69 @@ Note: you may need to restart the kernel to use updated packages.
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>accuracy score: 0.843375
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">TypeError</span>                                 Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">/Users/xiaoa1/VSCode/ds/_notebooks/2023-05-23-NLP.ipynb Cell 15</span> in <span class="ansi-cyan-fg">1
+</span><span class="ansi-green-fg">----&gt; &lt;a href=&#39;vscode-notebook-cell:/Users/xiaoa1/VSCode/ds/_notebooks/2023-05-23-NLP.ipynb#X21sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> print(&#39;accuracy score: &#39;+ str(model.score(test_x, test_y, test_z)))
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/sklearn/pipeline.py:722</span>, in <span class="ansi-cyan-fg">Pipeline.score</span><span class="ansi-blue-fg">(self, X, y, sample_weight)</span>
+<span class="ansi-green-intense-fg ansi-bold">    720</span> if sample_weight is not None:
+<span class="ansi-green-intense-fg ansi-bold">    721</span>     score_params[&#34;sample_weight&#34;] = sample_weight
+<span class="ansi-green-fg">--&gt; 722</span> return self.steps[-1][1].score(Xt, y, **score_params)
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/sklearn/base.py:668</span>, in <span class="ansi-cyan-fg">ClassifierMixin.score</span><span class="ansi-blue-fg">(self, X, y, sample_weight)</span>
+<span class="ansi-green-intense-fg ansi-bold">    643</span> &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">    644</span> Return the mean accuracy on the given test data and labels.
+<span class="ansi-green-intense-fg ansi-bold">    645</span> 
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">    664</span>     Mean accuracy of ``self.predict(X)`` w.r.t. `y`.
+<span class="ansi-green-intense-fg ansi-bold">    665</span> &#34;&#34;&#34;
+<span class="ansi-green-intense-fg ansi-bold">    666</span> from .metrics import accuracy_score
+<span class="ansi-green-fg">--&gt; 668</span> return accuracy_score(y, self.predict(X), sample_weight=sample_weight)
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/sklearn/utils/_param_validation.py:192</span>, in <span class="ansi-cyan-fg">validate_params.&lt;locals&gt;.decorator.&lt;locals&gt;.wrapper</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+<span class="ansi-green-intense-fg ansi-bold">    187</span> validate_parameter_constraints(
+<span class="ansi-green-intense-fg ansi-bold">    188</span>     parameter_constraints, params, caller_name=func.__qualname__
+<span class="ansi-green-intense-fg ansi-bold">    189</span> )
+<span class="ansi-green-intense-fg ansi-bold">    191</span> try:
+<span class="ansi-green-fg">--&gt; 192</span>     return func(*args, **kwargs)
+<span class="ansi-green-intense-fg ansi-bold">    193</span> except InvalidParameterError as e:
+<span class="ansi-green-intense-fg ansi-bold">    194</span>     # When the function is just a wrapper around an estimator, we allow
+<span class="ansi-green-intense-fg ansi-bold">    195</span>     # the function to delegate validation to the estimator, but we replace
+<span class="ansi-green-intense-fg ansi-bold">    196</span>     # the name of the estimator by the name of the function in the error
+<span class="ansi-green-intense-fg ansi-bold">    197</span>     # message to avoid confusion.
+<span class="ansi-green-intense-fg ansi-bold">    198</span>     msg = re.sub(
+<span class="ansi-green-intense-fg ansi-bold">    199</span>         r&#34;parameter of \w+ must be&#34;,
+<span class="ansi-green-intense-fg ansi-bold">    200</span>         f&#34;parameter of {func.__qualname__} must be&#34;,
+<span class="ansi-green-intense-fg ansi-bold">    201</span>         str(e),
+<span class="ansi-green-intense-fg ansi-bold">    202</span>     )
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/sklearn/metrics/_classification.py:229</span>, in <span class="ansi-cyan-fg">accuracy_score</span><span class="ansi-blue-fg">(y_true, y_pred, normalize, sample_weight)</span>
+<span class="ansi-green-intense-fg ansi-bold">    226</span> else:
+<span class="ansi-green-intense-fg ansi-bold">    227</span>     score = y_true == y_pred
+<span class="ansi-green-fg">--&gt; 229</span> return _weighted_sum(score, sample_weight, normalize)
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/sklearn/metrics/_classification.py:139</span>, in <span class="ansi-cyan-fg">_weighted_sum</span><span class="ansi-blue-fg">(sample_score, sample_weight, normalize)</span>
+<span class="ansi-green-intense-fg ansi-bold">    137</span> def _weighted_sum(sample_score, sample_weight, normalize=False):
+<span class="ansi-green-intense-fg ansi-bold">    138</span>     if normalize:
+<span class="ansi-green-fg">--&gt; 139</span>         return np.average(sample_score, weights=sample_weight)
+<span class="ansi-green-intense-fg ansi-bold">    140</span>     elif sample_weight is not None:
+<span class="ansi-green-intense-fg ansi-bold">    141</span>         return np.dot(sample_score, sample_weight)
+
+File <span class="ansi-green-fg">&lt;__array_function__ internals&gt;:200</span>, in <span class="ansi-cyan-fg">average</span><span class="ansi-blue-fg">(*args, **kwargs)</span>
+
+File <span class="ansi-green-fg">/opt/homebrew/lib/python3.10/site-packages/numpy/lib/function_base.py:551</span>, in <span class="ansi-cyan-fg">average</span><span class="ansi-blue-fg">(a, axis, weights, returned, keepdims)</span>
+<span class="ansi-green-intense-fg ansi-bold">    547</span>     if np.any(scl == 0.0):
+<span class="ansi-green-intense-fg ansi-bold">    548</span>         raise ZeroDivisionError(
+<span class="ansi-green-intense-fg ansi-bold">    549</span>             &#34;Weights sum to zero, can&#39;t be normalized&#34;)
+<span class="ansi-green-fg">--&gt; 551</span>     avg = avg_as_array = np.multiply(a, wgt,
+<span class="ansi-green-intense-fg ansi-bold">    552</span>                       dtype=result_dtype).sum(axis, **keepdims_kw) / scl
+<span class="ansi-green-intense-fg ansi-bold">    554</span> if returned:
+<span class="ansi-green-intense-fg ansi-bold">    555</span>     if scl.shape != avg_as_array.shape:
+
+<span class="ansi-red-fg">TypeError</span>: unsupported operand type(s) for /: &#39;str&#39; and &#39;str&#39;</pre>
 </div>
 </div>
 
@@ -512,7 +546,7 @@ Note: you may need to restart the kernel to use updated packages.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;bright color and good texture&#39;</span><span class="p">]))</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">([</span><span class="s1">&#39;&#39;</span><span class="p">]))</span>
 </pre></div>
 
     </div>
@@ -525,7 +559,7 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[&#39;beauty&#39;]
+<pre>[&#39;health personal care&#39;]
 </pre>
 </div>
 </div>
