@@ -127,7 +127,7 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>This notebook runs with the Python 3.9 kernel and can be easily downloaded to run, test, and modify locally. It uses data from a <a href="https://www.kaggle.com/datasets/kashnitsky/hierarchical-text-classification?select=train_40k.csv">CSV file</a> containing 40000 Amazon reviews. It currently uses text input to predict the score of a given review, but this can be changed by replacing "Score" references to any other column, such as the class names Cat1, Cat2 or Cat3.</p>
+<p>This notebook runs with the Python 3.9 kernel and can be easily downloaded to run, test, and modify locally. It uses data from a <a href="https://www.kaggle.com/datasets/kashnitsky/hierarchical-text-classification?select=train_40k.csv">CSV file</a> containing 40000 Amazon reviews. It currently uses text input to predict the category of a given review, but this can be changed by replacing "Cat1" references to any other column, such as Score or other classes Cat2 or Cat3.</p>
 
 </div>
 </div>
@@ -162,16 +162,13 @@ window.onload = wrap_img;
 <pre>Requirement already satisfied: scikit-learn in /opt/homebrew/lib/python3.10/site-packages (1.2.2)
 Requirement already satisfied: numpy in /opt/homebrew/lib/python3.10/site-packages (1.24.3)
 Requirement already satisfied: pandas in /opt/homebrew/lib/python3.10/site-packages (2.0.1)
+Requirement already satisfied: scipy&gt;=1.3.2 in /opt/homebrew/lib/python3.10/site-packages (from scikit-learn) (1.10.1)
 Requirement already satisfied: joblib&gt;=1.1.1 in /opt/homebrew/lib/python3.10/site-packages (from scikit-learn) (1.2.0)
 Requirement already satisfied: threadpoolctl&gt;=2.0.0 in /opt/homebrew/lib/python3.10/site-packages (from scikit-learn) (3.1.0)
-Requirement already satisfied: scipy&gt;=1.3.2 in /opt/homebrew/lib/python3.10/site-packages (from scikit-learn) (1.10.1)
-Requirement already satisfied: tzdata&gt;=2022.1 in /opt/homebrew/lib/python3.10/site-packages (from pandas) (2023.3)
-Requirement already satisfied: pytz&gt;=2020.1 in /opt/homebrew/lib/python3.10/site-packages (from pandas) (2023.3)
 Requirement already satisfied: python-dateutil&gt;=2.8.2 in /Users/xiaoa1/Library/Python/3.10/lib/python/site-packages (from pandas) (2.8.2)
+Requirement already satisfied: pytz&gt;=2020.1 in /opt/homebrew/lib/python3.10/site-packages (from pandas) (2023.3)
+Requirement already satisfied: tzdata&gt;=2022.1 in /opt/homebrew/lib/python3.10/site-packages (from pandas) (2023.3)
 Requirement already satisfied: six&gt;=1.5 in /Users/xiaoa1/Library/Python/3.10/lib/python/site-packages (from python-dateutil&gt;=2.8.2-&gt;pandas) (1.16.0)
-
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> A new release of pip is available: <span class="ansi-red-fg">23.0.1</span> -&gt; <span class="ansi-green-fg">23.1.2</span>
-<span class="ansi-bold">[</span><span class="ansi-blue-fg">notice</span><span class="ansi-bold">]</span> To update, run: <span class="ansi-green-fg">python3.10 -m pip install --upgrade pip</span>
 Note: you may need to restart the kernel to use updated packages.
 </pre>
 </div>
@@ -231,11 +228,11 @@ Note: you may need to restart the kernel to use updated packages.
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_original</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;/Users/xiaoa1/VSCode/ds/_notebooks/data/train_40k.csv&#39;</span><span class="p">)</span>
 
-<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Text&#39;</span><span class="p">,</span> <span class="s1">&#39;Score&#39;</span><span class="p">]</span>
+<span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;Text&#39;</span><span class="p">,</span> <span class="s1">&#39;Cat1&#39;</span><span class="p">]</span>
 
 <span class="n">df</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">df_original</span><span class="p">[</span><span class="n">columns</span><span class="p">])</span>
 
-<span class="n">df</span><span class="o">.</span><span class="n">Score</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">Cat1</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
 
 <span class="n">p</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;[^\w\s]+&#39;</span><span class="p">)</span>
 
@@ -274,34 +271,34 @@ Note: you may need to restart the kernel to use updated packages.
     <tr style="text-align: right;">
       <th></th>
       <th>Text</th>
-      <th>Score</th>
+      <th>Cat1</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>15121</th>
-      <td>this product has a nice tone and really covers...</td>
-      <td>5.0</td>
+      <th>14813</th>
+      <td>although this item is not cheap it has worked ...</td>
+      <td>health personal care</td>
     </tr>
     <tr>
-      <th>37624</th>
-      <td>i placed my order and recieved exactly what i ...</td>
-      <td>4.0</td>
+      <th>31868</th>
+      <td>this was my all time favorite for a number of ...</td>
+      <td>beauty</td>
     </tr>
     <tr>
-      <th>32824</th>
-      <td>these cost 200 from the grocery store no reaso...</td>
-      <td>2.0</td>
+      <th>25302</th>
+      <td>this product came in a timely fashion is a gre...</td>
+      <td>pet supplies</td>
     </tr>
     <tr>
-      <th>4019</th>
-      <td>my 3 12 year old daughter received this as a c...</td>
-      <td>2.0</td>
+      <th>31767</th>
+      <td>these taste graet for a health bar of course y...</td>
+      <td>health personal care</td>
     </tr>
     <tr>
-      <th>23645</th>
-      <td>these are great for potty training little boys...</td>
-      <td>5.0</td>
+      <th>25006</th>
+      <td>my doctor recommened 2 brands for my osteoarth...</td>
+      <td>health personal care</td>
     </tr>
     <tr>
       <th>...</th>
@@ -309,29 +306,29 @@ Note: you may need to restart the kernel to use updated packages.
       <td>...</td>
     </tr>
     <tr>
-      <th>13774</th>
-      <td>definitely not worth all the hype i dont think...</td>
-      <td>3.0</td>
+      <th>14397</th>
+      <td>i love this white noise machine i was used to ...</td>
+      <td>health personal care</td>
     </tr>
     <tr>
-      <th>22049</th>
-      <td>this game is a cute boardgame geared towards p...</td>
-      <td>4.0</td>
+      <th>24667</th>
+      <td>my vet told me about this as a nonantibioticno...</td>
+      <td>beauty</td>
     </tr>
     <tr>
-      <th>6740</th>
-      <td>its hard to open even harder to close im afrai...</td>
-      <td>1.0</td>
+      <th>20984</th>
+      <td>i am giving this as a gift and when it arrived...</td>
+      <td>toys games</td>
     </tr>
     <tr>
-      <th>36539</th>
-      <td>i bought this makeup in nyc at henri bendel ab...</td>
-      <td>2.0</td>
+      <th>301</th>
+      <td>i think this is one of the nicest in the city ...</td>
+      <td>toys games</td>
     </tr>
     <tr>
-      <th>22621</th>
-      <td>cutting sugar out of our dietwe went to splend...</td>
-      <td>5.0</td>
+      <th>39568</th>
+      <td>i purchased this at a discountcloseout store f...</td>
+      <td>beauty</td>
     </tr>
   </tbody>
 </table>
@@ -361,7 +358,7 @@ Note: you may need to restart the kernel to use updated packages.
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Score</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">Text</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">Cat1</span>
 <span class="n">train_x</span><span class="p">,</span> <span class="n">test_x</span><span class="p">,</span> <span class="n">train_y</span><span class="p">,</span> <span class="n">test_y</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">4000</span><span class="p">)</span>
 </pre></div>
 
@@ -450,7 +447,7 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>accuracy score: 0.647
+<pre>accuracy score: 0.843
 </pre>
 </div>
 </div>
@@ -488,7 +485,7 @@ Note: you may need to restart the kernel to use updated packages.
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[4.]
+<pre>[&#39;grocery gourmet food&#39;]
 </pre>
 </div>
 </div>
