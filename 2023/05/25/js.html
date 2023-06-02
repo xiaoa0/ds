@@ -252,10 +252,10 @@ SyntaxError: Unexpected token %
 
 
 
-<div id="aef47ee8-1dbf-4a6d-82ac-c704e7806612"></div>
+<div id="05b012d4-b7f2-43f2-914b-d70dc78b93dd"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#aef47ee8-1dbf-4a6d-82ac-c704e7806612');
+var element = $('#05b012d4-b7f2-43f2-914b-d70dc78b93dd');
 console.log("JavaScript/Jupyter Output Intro");
 
 // Browser Console output; debugging or tracing
@@ -328,10 +328,10 @@ element.append('<br><b>Hello World Again!');
 
 
 
-<div id="46742f58-ca87-4943-bbe9-f1f5327db82c"></div>
+<div id="c3e03442-957e-4a49-aeb5-dcacd03d6f01"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#46742f58-ca87-4943-bbe9-f1f5327db82c');
+var element = $('#c3e03442-957e-4a49-aeb5-dcacd03d6f01');
 console.log("Variable Definition");
 
 var msg = "Hello, World!";
@@ -413,10 +413,10 @@ element.text(msg);
 
 
 
-<div id="1e1fd4d1-124c-4ecb-8964-2d388775dace"></div>
+<div id="4d94b4c2-c393-46ff-8621-99e5e27a4169"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#1e1fd4d1-124c-4ecb-8964-2d388775dace');
+var element = $('#4d94b4c2-c393-46ff-8621-99e5e27a4169');
 console.log("Function Definition");
 
 /* Function: logIt
@@ -524,10 +524,10 @@ logIt(msg + "  " + classOf); // concatenation of strings
 
 
 
-<div id="d9bcf90b-a45a-4f55-8524-de56b358016e"></div>
+<div id="9df2275d-5c89-4162-9a36-7216e73d31bb"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d9bcf90b-a45a-4f55-8524-de56b358016e');
+var element = $('#9df2275d-5c89-4162-9a36-7216e73d31bb');
 console.log("Examine Data Types");
 
 // Function to add typeof to output
@@ -774,10 +774,10 @@ logIt(JSON.stringify(person));  //method used to convert this object into readab
 
 
 
-<div id="749dc774-dc19-41f0-9dee-efe571fe80e7"></div>
+<div id="e9c0a02c-99a9-480a-bedc-46a608f3e0e5"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#749dc774-dc19-41f0-9dee-efe571fe80e7');
+var element = $('#e9c0a02c-99a9-480a-bedc-46a608f3e0e5');
 console.log("Person objects");
 
 /* class: Person
@@ -995,10 +995,10 @@ student.logIt(); // log to console
 
 
 
-<div id="d9d87f48-3ae8-45ee-a26b-2ea7795164d2"></div>
+<div id="60c35045-c682-4c37-a440-58441ff03877"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#d9d87f48-3ae8-45ee-a26b-2ea7795164d2');
+var element = $('#60c35045-c682-4c37-a440-58441ff03877');
 console.log("Classroom object");
 
 /* class: Person
@@ -1187,10 +1187,10 @@ $('#jsonText').text(compsci.json);  // posts/embeds/writes compsci.json to HTML 
 
 
 
-<div id="18ceefbb-77aa-4a5c-92f1-ac9fd21bc033"></div>
+<div id="0968a7e4-f5e5-40de-8a3a-ca1e84fae9aa"></div>
 <div class="output_subarea output_javascript ">
 <script type="text/javascript">
-var element = $('#18ceefbb-77aa-4a5c-92f1-ac9fd21bc033');
+var element = $('#0968a7e4-f5e5-40de-8a3a-ca1e84fae9aa');
 console.log("Classroom Web Page");
 
 // extract JSON text from HTML page
@@ -1341,6 +1341,63 @@ for (var row of classroom) {
 
 </div>
 
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="kr">const</span> <span class="nx">myElement</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">&quot;demo&quot;</span><span class="p">);</span>
+
+<span class="kd">function</span> <span class="nx">getLocation</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">navigator</span><span class="p">.</span><span class="nx">geolocation</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span><span class="nx">showPosition</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">myElement</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Geolocation is not supported by this browser.&quot;</span><span class="p">;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kd">function</span> <span class="nx">showPosition</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">myElement</span><span class="p">.</span><span class="nx">innerHTML</span> <span class="o">=</span> <span class="s2">&quot;Latitude: &quot;</span> <span class="o">+</span> <span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">latitude</span> <span class="o">+</span>
+  <span class="s2">&quot;&lt;br&gt;Longitude: &quot;</span> <span class="o">+</span> <span class="nx">position</span><span class="p">.</span><span class="nx">coords</span><span class="p">.</span><span class="nx">longitude</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_text output_error">
+<pre>
+evalmachine.&lt;anonymous&gt;:1
+const myElement = document.getElementById(&#34;demo&#34;);
+                  ^
+
+ReferenceError: document is not defined
+    at evalmachine.&lt;anonymous&gt;:1:19
+    at Script.runInThisContext (vm.js:96:20)
+    at Object.runInThisContext (vm.js:303:38)
+    at run ([eval]:1020:15)
+    at onRunRequest ([eval]:864:18)
+    at onMessage ([eval]:828:13)
+    at process.emit (events.js:182:13)
+    at emit (internal/child_process.js:812:12)
+    at process._tickCallback (internal/process/next_tick.js:63:19)</pre>
+</div>
 </div>
 
 </div>
