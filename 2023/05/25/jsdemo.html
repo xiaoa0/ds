@@ -125,6 +125,98 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">CsvToHtmlTable</span> <span class="o">=</span> <span class="nx">CsvToHtmlTable</span> <span class="o">||</span> <span class="p">{};</span>
+
+<span class="nx">CsvToHtmlTable</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="kd">var</span> <span class="nx">csv_path</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">csv_path</span> <span class="o">||</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">element</span> <span class="o">||</span> <span class="s2">&quot;table-container&quot;</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">allow_download</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">allow_download</span> <span class="o">||</span> <span class="kc">false</span><span class="p">;</span>
+        <span class="kd">var</span> <span class="nx">csv_options</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">csv_options</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="kd">var</span> <span class="nx">datatables_options</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatables_options</span> <span class="o">||</span> <span class="p">{};</span>
+        <span class="kd">var</span> <span class="nx">custom_formatting</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">custom_formatting</span> <span class="o">||</span> <span class="p">[];</span>
+        <span class="kd">var</span> <span class="nx">customTemplates</span> <span class="o">=</span> <span class="p">{};</span>
+        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">custom_formatting</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
+            <span class="kd">var</span> <span class="nx">colIdx</span> <span class="o">=</span> <span class="nx">v</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+            <span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">v</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
+            <span class="nx">customTemplates</span><span class="p">[</span><span class="nx">colIdx</span><span class="p">]</span> <span class="o">=</span> <span class="nx">func</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="kd">var</span> <span class="nx">$table</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;table class=&#39;table table-striped table-condensed&#39; id=&#39;&quot;</span> <span class="o">+</span> <span class="nx">el</span> <span class="o">+</span> <span class="s2">&quot;-table&#39;&gt;&lt;/table&gt;&quot;</span><span class="p">);</span>
+        <span class="kd">var</span> <span class="nx">$containerElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">el</span><span class="p">);</span>
+        <span class="nx">$containerElement</span><span class="p">.</span><span class="nx">empty</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="nx">$table</span><span class="p">);</span>
+
+        <span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">csv_path</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span>
+            <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+                <span class="kd">var</span> <span class="nx">csvData</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">csv</span><span class="p">.</span><span class="nx">toArrays</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">csv_options</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">$tableHead</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;thead&gt;&lt;/thead&gt;&quot;</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">csvHeaderRow</span> <span class="o">=</span> <span class="nx">csvData</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
+                <span class="kd">var</span> <span class="nx">$tableHeadRow</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tr&gt;&lt;/tr&gt;&quot;</span><span class="p">);</span>
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">headerIdx</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">headerIdx</span> <span class="o">&lt;</span> <span class="nx">csvHeaderRow</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">headerIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">$tableHeadRow</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;th&gt;&lt;/th&gt;&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">csvHeaderRow</span><span class="p">[</span><span class="nx">headerIdx</span><span class="p">]));</span>
+                <span class="p">}</span>
+                <span class="nx">$tableHead</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableHeadRow</span><span class="p">);</span>
+
+                <span class="nx">$table</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableHead</span><span class="p">);</span>
+                <span class="kd">var</span> <span class="nx">$tableBody</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tbody&gt;&lt;/tbody&gt;&quot;</span><span class="p">);</span>
+
+                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">rowIdx</span> <span class="o">=</span> <span class="mf">1</span><span class="p">;</span> <span class="nx">rowIdx</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">rowIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="kd">var</span> <span class="nx">$tableBodyRow</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tr&gt;&lt;/tr&gt;&quot;</span><span class="p">);</span>
+                    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colIdx</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">colIdx</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">colIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+                        <span class="kd">var</span> <span class="nx">$tableBodyRowTd</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;td&gt;&lt;/td&gt;&quot;</span><span class="p">);</span>
+                        <span class="kd">var</span> <span class="nx">cellTemplateFunc</span> <span class="o">=</span> <span class="nx">customTemplates</span><span class="p">[</span><span class="nx">colIdx</span><span class="p">];</span>
+                        <span class="k">if</span> <span class="p">(</span><span class="nx">cellTemplateFunc</span><span class="p">)</span> <span class="p">{</span>
+                            <span class="nx">$tableBodyRowTd</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">cellTemplateFunc</span><span class="p">(</span><span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">][</span><span class="nx">colIdx</span><span class="p">]));</span>
+                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                            <span class="nx">$tableBodyRowTd</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">][</span><span class="nx">colIdx</span><span class="p">]);</span>
+                        <span class="p">}</span>
+                        <span class="nx">$tableBodyRow</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBodyRowTd</span><span class="p">);</span>
+                        <span class="nx">$tableBody</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBodyRow</span><span class="p">);</span>
+                    <span class="p">}</span>
+                <span class="p">}</span>
+                <span class="nx">$table</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBody</span><span class="p">);</span>
+
+                <span class="nx">$table</span><span class="p">.</span><span class="nx">DataTable</span><span class="p">(</span><span class="nx">datatables_options</span><span class="p">);</span>
+
+                <span class="k">if</span> <span class="p">(</span><span class="nx">allow_download</span><span class="p">)</span> <span class="p">{</span>
+                    <span class="nx">$containerElement</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;&lt;a class=&#39;btn btn-info&#39; href=&#39;&quot;</span> <span class="o">+</span> <span class="nx">csv_path</span> <span class="o">+</span> <span class="s2">&quot;&#39;&gt;&lt;i class=&#39;glyphicon glyphicon-download&#39;&gt;&lt;/i&gt; Download as CSV&lt;/a&gt;&lt;/p&gt;&quot;</span><span class="p">);</span>
+                <span class="p">}</span>
+            <span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{ init: [Function: init] }</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
 </div>
 
 
