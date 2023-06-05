@@ -79,7 +79,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      2 min read
+      1 min read
     
 </span></p>
 
@@ -132,65 +132,57 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="kd">var</span> <span class="nx">CsvToHtmlTable</span> <span class="o">=</span> <span class="nx">CsvToHtmlTable</span> <span class="o">||</span> <span class="p">{};</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="o">!</span><span class="nx">pip</span> <span class="nx">install</span> <span class="nx">papaparse</span><span class="p">;</span>
+<span class="o">!</span><span class="nx">pip</span> <span class="nx">install</span> <span class="nx">jquery</span><span class="p">;</span>
+</pre></div>
 
-<span class="nx">CsvToHtmlTable</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">options</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">options</span> <span class="o">=</span> <span class="nx">options</span> <span class="o">||</span> <span class="p">{};</span>
-        <span class="kd">var</span> <span class="nx">csv_path</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">csv_path</span> <span class="o">||</span> <span class="s2">&quot;https://github.com/xiaoa0/ds/blob/master/_notebooks/data/train_40k.csv&quot;</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">el</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">element</span> <span class="o">||</span> <span class="s2">&quot;table-container&quot;</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">allow_download</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">allow_download</span> <span class="o">||</span> <span class="kc">false</span><span class="p">;</span>
-        <span class="kd">var</span> <span class="nx">csv_options</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">csv_options</span> <span class="o">||</span> <span class="p">{};</span>
-        <span class="kd">var</span> <span class="nx">datatables_options</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">datatables_options</span> <span class="o">||</span> <span class="p">{};</span>
-        <span class="kd">var</span> <span class="nx">custom_formatting</span> <span class="o">=</span> <span class="nx">options</span><span class="p">.</span><span class="nx">custom_formatting</span> <span class="o">||</span> <span class="p">[];</span>
-        <span class="kd">var</span> <span class="nx">customTemplates</span> <span class="o">=</span> <span class="p">{};</span>
-        <span class="nx">$</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="nx">custom_formatting</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">i</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span> <span class="p">{</span>
-            <span class="kd">var</span> <span class="nx">colIdx</span> <span class="o">=</span> <span class="nx">v</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
-            <span class="kd">var</span> <span class="nx">func</span> <span class="o">=</span> <span class="nx">v</span><span class="p">[</span><span class="mf">1</span><span class="p">];</span>
-            <span class="nx">customTemplates</span><span class="p">[</span><span class="nx">colIdx</span><span class="p">]</span> <span class="o">=</span> <span class="nx">func</span><span class="p">;</span>
-        <span class="p">});</span>
+    </div>
+</div>
+</div>
 
-        <span class="kd">var</span> <span class="nx">$table</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;table class=&#39;table table-striped table-condensed&#39; id=&#39;&quot;</span> <span class="o">+</span> <span class="nx">el</span> <span class="o">+</span> <span class="s2">&quot;-table&#39;&gt;&lt;/table&gt;&quot;</span><span class="p">);</span>
-        <span class="kd">var</span> <span class="nx">$containerElement</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#&quot;</span> <span class="o">+</span> <span class="nx">el</span><span class="p">);</span>
-        <span class="nx">$containerElement</span><span class="p">.</span><span class="nx">empty</span><span class="p">().</span><span class="nx">append</span><span class="p">(</span><span class="nx">$table</span><span class="p">);</span>
+</div>
+    
 
-        <span class="nx">$</span><span class="p">.</span><span class="nx">when</span><span class="p">(</span><span class="nx">$</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="nx">csv_path</span><span class="p">)).</span><span class="nx">then</span><span class="p">(</span>
-            <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-                <span class="kd">var</span> <span class="nx">csvData</span> <span class="o">=</span> <span class="nx">$</span><span class="p">.</span><span class="nx">csv</span><span class="p">.</span><span class="nx">toArrays</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="nx">csv_options</span><span class="p">);</span>
-                <span class="kd">var</span> <span class="nx">$tableHead</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;thead&gt;&lt;/thead&gt;&quot;</span><span class="p">);</span>
-                <span class="kd">var</span> <span class="nx">csvHeaderRow</span> <span class="o">=</span> <span class="nx">csvData</span><span class="p">[</span><span class="mf">0</span><span class="p">];</span>
-                <span class="kd">var</span> <span class="nx">$tableHeadRow</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tr&gt;&lt;/tr&gt;&quot;</span><span class="p">);</span>
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">headerIdx</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">headerIdx</span> <span class="o">&lt;</span> <span class="nx">csvHeaderRow</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">headerIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">$tableHeadRow</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;th&gt;&lt;/th&gt;&quot;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">csvHeaderRow</span><span class="p">[</span><span class="nx">headerIdx</span><span class="p">]));</span>
-                <span class="p">}</span>
-                <span class="nx">$tableHead</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableHeadRow</span><span class="p">);</span>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
 
-                <span class="nx">$table</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableHead</span><span class="p">);</span>
-                <span class="kd">var</span> <span class="nx">$tableBody</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tbody&gt;&lt;/tbody&gt;&quot;</span><span class="p">);</span>
-
-                <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">rowIdx</span> <span class="o">=</span> <span class="mf">1</span><span class="p">;</span> <span class="nx">rowIdx</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">rowIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="kd">var</span> <span class="nx">$tableBodyRow</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;tr&gt;&lt;/tr&gt;&quot;</span><span class="p">);</span>
-                    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">colIdx</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">colIdx</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">colIdx</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
-                        <span class="kd">var</span> <span class="nx">$tableBodyRowTd</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;td&gt;&lt;/td&gt;&quot;</span><span class="p">);</span>
-                        <span class="kd">var</span> <span class="nx">cellTemplateFunc</span> <span class="o">=</span> <span class="nx">customTemplates</span><span class="p">[</span><span class="nx">colIdx</span><span class="p">];</span>
-                        <span class="k">if</span> <span class="p">(</span><span class="nx">cellTemplateFunc</span><span class="p">)</span> <span class="p">{</span>
-                            <span class="nx">$tableBodyRowTd</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="nx">cellTemplateFunc</span><span class="p">(</span><span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">][</span><span class="nx">colIdx</span><span class="p">]));</span>
-                        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                            <span class="nx">$tableBodyRowTd</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">csvData</span><span class="p">[</span><span class="nx">rowIdx</span><span class="p">][</span><span class="nx">colIdx</span><span class="p">]);</span>
-                        <span class="p">}</span>
-                        <span class="nx">$tableBodyRow</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBodyRowTd</span><span class="p">);</span>
-                        <span class="nx">$tableBody</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBodyRow</span><span class="p">);</span>
-                    <span class="p">}</span>
-                <span class="p">}</span>
-                <span class="nx">$table</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$tableBody</span><span class="p">);</span>
-
-                <span class="nx">$table</span><span class="p">.</span><span class="nx">DataTable</span><span class="p">(</span><span class="nx">datatables_options</span><span class="p">);</span>
-
-                <span class="k">if</span> <span class="p">(</span><span class="nx">allow_download</span><span class="p">)</span> <span class="p">{</span>
-                    <span class="nx">$containerElement</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&quot;&lt;p&gt;&lt;a class=&#39;btn btn-info&#39; href=&#39;&quot;</span> <span class="o">+</span> <span class="nx">csv_path</span> <span class="o">+</span> <span class="s2">&quot;&#39;&gt;&lt;i class=&#39;glyphicon glyphicon-download&#39;&gt;&lt;/i&gt; Download as CSV&lt;/a&gt;&lt;/p&gt;&quot;</span><span class="p">);</span>
-                <span class="p">}</span>
-            <span class="p">});</span>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-javascript"><pre><span></span><span class="o">%%</span><span class="nx">javascript</span>
+<span class="c1">// Import papaparse library</span>
+<span class="nx">require</span><span class="p">.</span><span class="nx">config</span><span class="p">({</span>
+    <span class="nx">paths</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">PapaParse</span><span class="o">:</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/papaparse@5.3.0&#39;</span><span class="p">,</span>
+        <span class="nx">jquery</span><span class="o">:</span> <span class="s1">&#39;https://code.jquery.com/jquery-3.6.0.min&#39;</span><span class="p">,</span>
     <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="c1">// Create a function to handle the CSV data</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">handleCSVData</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">csvData</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// Display the data in a table</span>
+    <span class="kd">var</span> <span class="nx">tableHTML</span> <span class="o">=</span> <span class="s1">&#39;&lt;table&gt;&#39;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">i</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">tableHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&#39;</span><span class="p">;</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">j</span> <span class="o">=</span> <span class="mf">0</span><span class="p">;</span> <span class="nx">j</span> <span class="o">&lt;</span> <span class="nx">csvData</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="nx">tableHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;td&gt;&#39;</span> <span class="o">+</span> <span class="nx">csvData</span><span class="p">[</span><span class="nx">i</span><span class="p">][</span><span class="nx">j</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;&lt;/td&gt;&#39;</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="nx">tableHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/tr&gt;&#39;</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="nx">tableHTML</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span><span class="p">;</span>
+
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#csvTable&#39;</span><span class="p">).</span><span class="nx">html</span><span class="p">(</span><span class="nx">tableHTML</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="c1">// Load the CSV file</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">loadCSVFile</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">file</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">PapaParse</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">file</span><span class="p">,</span> <span class="p">{</span>
+        <span class="nx">complete</span><span class="o">:</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
+            <span class="c1">// Call the handleCSVData function to display the data</span>
+            <span class="nb">window</span><span class="p">.</span><span class="nx">handleCSVData</span><span class="p">(</span><span class="nx">results</span><span class="p">.</span><span class="nx">data</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">});</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -198,22 +190,6 @@ window.onload = wrap_img;
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-
-
-<div class="output_text output_subarea output_execute_result">
-<pre>{ init: [Function: init] }</pre>
-</div>
-
-</div>
-
-</div>
-</div>
-
 </div>
     
 
@@ -224,50 +200,13 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="c1">// XMLHttpRequest example</span>
-<span class="kr">const</span> <span class="nx">xhr</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">XMLHttpRequest</span><span class="p">();</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">open</span><span class="p">(</span><span class="s1">&#39;https://github.com/xiaoa0/ds/blob/master/_notebooks/data/train_40k.csv&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">onreadystatechange</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
-  <span class="k">if</span> <span class="p">(</span><span class="nx">xhr</span><span class="p">.</span><span class="nx">readyState</span> <span class="o">===</span> <span class="mf">4</span> <span class="o">&amp;&amp;</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">status</span> <span class="o">===</span> <span class="mf">200</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kr">const</span> <span class="nx">data</span> <span class="o">=</span> <span class="nx">xhr</span><span class="p">.</span><span class="nx">responseText</span><span class="p">;</span>
-    <span class="c1">// Process the CSV data</span>
-    <span class="c1">// ...</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-<span class="nx">xhr</span><span class="p">.</span><span class="nx">send</span><span class="p">();</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="o">&lt;</span><span class="nx">div</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;csvTable&quot;</span><span class="o">&gt;&lt;</span><span class="err">/div&gt;</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-evalmachine.&lt;anonymous&gt;:1
-// XMLHttpRequest example
-^
-
-SyntaxError: Identifier &#39;xhr&#39; has already been declared
-    at evalmachine.&lt;anonymous&gt;:1:1
-    at Script.runInThisContext (vm.js:96:20)
-    at Object.runInThisContext (vm.js:303:38)
-    at run ([eval]:1020:15)
-    at onRunRequest ([eval]:864:18)
-    at onMessage ([eval]:828:13)
-    at process.emit (events.js:182:13)
-    at emit (internal/child_process.js:812:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     
 
@@ -278,121 +217,10 @@ SyntaxError: Identifier &#39;xhr&#39; has already been declared
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="o">%%</span><span class="nx">js</span>
-
-<span class="c1">// Fetch API example</span>
-<span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://raw.githubusercontent.com/xiaoa0/ds/master/_notebooks/data/train_40k.csv&#39;</span><span class="p">)</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="nx">response</span><span class="p">.</span><span class="nx">text</span><span class="p">())</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
-    <span class="c1">// Process the CSV data</span>
-    <span class="kr">const</span> <span class="nx">rows</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;\n&#39;</span><span class="p">);</span>
-    <span class="kr">const</span> <span class="nx">table</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;table&#39;</span><span class="p">);</span>
-    
-    <span class="nx">rows</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">row</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="kr">const</span> <span class="nx">cells</span> <span class="o">=</span> <span class="nx">row</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">);</span>
-      <span class="kr">const</span> <span class="nx">tableRow</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">);</span>
-      
-      <span class="nx">cells</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="nx">cell</span> <span class="p">=&gt;</span> <span class="p">{</span>
-        <span class="kr">const</span> <span class="nx">tableCell</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span><span class="p">(</span><span class="s1">&#39;td&#39;</span><span class="p">);</span>
-        <span class="nx">tableCell</span><span class="p">.</span><span class="nx">textContent</span> <span class="o">=</span> <span class="nx">cell</span><span class="p">;</span>
-        <span class="nx">tableRow</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tableCell</span><span class="p">);</span>
-      <span class="p">});</span>
-      
-      <span class="nx">table</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">tableRow</span><span class="p">);</span>
-    <span class="p">});</span>
-    
-    <span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">.</span><span class="nx">appendChild</span><span class="p">(</span><span class="nx">table</span><span class="p">);</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="p">=&gt;</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">));</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-evalmachine.&lt;anonymous&gt;:1
-%%js
-^
-
-SyntaxError: Unexpected token %
-    at new Script (vm.js:79:7)
-    at createScript (vm.js:251:10)
-    at Object.runInThisContext (vm.js:303:10)
-    at run ([eval]:1020:15)
-    at onRunRequest ([eval]:864:18)
-    at onMessage ([eval]:828:13)
-    at process.emit (events.js:182:13)
-    at emit (internal/child_process.js:812:12)
-    at process._tickCallback (internal/process/next_tick.js:63:19)</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-    
-
-    
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-javascript"><pre><span></span><span class="o">%%</span><span class="nx">html</span>
-<span class="o">&lt;</span><span class="nx">head</span><span class="o">&gt;</span>
-    <span class="c">&lt;!--</span> <span class="nx">load</span> <span class="nx">jQuery</span> <span class="nx">and</span> <span class="nx">DataTables</span> <span class="nx">scripts</span> <span class="o">--&gt;</span>
-    <span class="o">&lt;</span><span class="nx">link</span> <span class="nx">rel</span><span class="o">=</span><span class="s2">&quot;stylesheet&quot;</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/css&quot;</span> <span class="nx">href</span><span class="o">=</span><span class="s2">&quot;https://cdn.datatables.net/1.13.4/css/jquery.dataTables.min.css&quot;</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">language</span><span class="o">=</span><span class="s2">&quot;javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;https://code.jquery.com/jquery-3.6.0.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-    <span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span><span class="kd">var</span> <span class="nx">define</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span><span class="o">&lt;</span><span class="err">/script&gt;</span>
-    <span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span> <span class="nx">language</span><span class="o">=</span><span class="s2">&quot;javascript&quot;</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-<span class="o">&lt;</span><span class="err">/head&gt;</span>
-<span class="o">&lt;</span><span class="nx">table</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flaskTable&quot;</span> <span class="kr">class</span><span class="o">=</span><span class="s2">&quot;table&quot;</span> <span class="nx">style</span><span class="o">=</span><span class="s2">&quot;width:100%&quot;</span><span class="o">&gt;</span>
-    <span class="o">&lt;</span><span class="nx">thead</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flaskHead&quot;</span><span class="o">&gt;</span>
-        <span class="o">&lt;</span><span class="nx">tr</span><span class="o">&gt;</span>
-            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">ID</span><span class="o">&lt;</span><span class="err">/th&gt;</span>
-            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Name</span><span class="o">&lt;</span><span class="err">/th&gt;</span>
-            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">DOB</span><span class="o">&lt;</span><span class="err">/th&gt;</span>
-            <span class="o">&lt;</span><span class="nx">th</span><span class="o">&gt;</span><span class="nx">Age</span><span class="o">&lt;</span><span class="err">/th&gt;</span>
-        <span class="o">&lt;</span><span class="err">/tr&gt;</span>
-    <span class="o">&lt;</span><span class="err">/thead&gt;</span>
-    <span class="o">&lt;</span><span class="nx">tbody</span> <span class="nx">id</span><span class="o">=</span><span class="s2">&quot;flaskBody&quot;</span><span class="o">&gt;&lt;</span><span class="err">/tbody&gt;</span>
-<span class="o">&lt;</span><span class="err">/table&gt;</span>
-
-<span class="o">&lt;</span><span class="nx">script</span><span class="o">&gt;</span>
-  <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">ready</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-    <span class="nx">fetch</span><span class="p">(</span><span class="s1">&#39;https://flask.nighthawkcodingsociety.com/api/users/&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">mode</span><span class="o">:</span> <span class="s1">&#39;cors&#39;</span> <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">response</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">response</span><span class="p">.</span><span class="nx">ok</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;API response failed&#39;</span><span class="p">);</span>
-      <span class="p">}</span>
-      <span class="k">return</span> <span class="nx">response</span><span class="p">.</span><span class="nx">json</span><span class="p">();</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">data</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="k">for</span> <span class="p">(</span><span class="kr">const</span> <span class="nx">row</span> <span class="k">of</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// BUG warning/resolution - DataTable requires row to be single append</span>
-        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#flaskBody&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="s1">&#39;&lt;tr&gt;&lt;td&gt;&#39;</span> <span class="o">+</span> 
-            <span class="nx">row</span><span class="p">.</span><span class="nx">id</span> <span class="o">+</span> <span class="s1">&#39;&lt;/td&gt;&lt;td&gt;&#39;</span> <span class="o">+</span> 
-            <span class="nx">row</span><span class="p">.</span><span class="nx">name</span> <span class="o">+</span> <span class="s1">&#39;&lt;/td&gt;&lt;td&gt;&#39;</span> <span class="o">+</span> 
-            <span class="nx">row</span><span class="p">.</span><span class="nx">dob</span> <span class="o">+</span> <span class="s1">&#39;&lt;/td&gt;&lt;td&gt;&#39;</span> <span class="o">+</span> 
-            <span class="nx">row</span><span class="p">.</span><span class="nx">age</span> <span class="o">+</span> <span class="s1">&#39;&lt;/td&gt;&lt;/tr&gt;&#39;</span><span class="p">);</span>
-      <span class="p">}</span>
-      <span class="c1">// BUG warning - Jupyter does not show Datatable controls, works on deployed GitHub pages</span>
-      <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;#flaskTable&quot;</span><span class="p">).</span><span class="nx">DataTable</span><span class="p">();</span>
-    <span class="p">})</span>
-    <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="nx">error</span> <span class="p">=&gt;</span> <span class="p">{</span>
-      <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error:&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="p">);</span>
-    <span class="p">});</span>
-  <span class="p">});</span>
-<span class="o">&lt;</span><span class="err">/script&gt;</span>
+<div class=" highlight hl-javascript"><pre><span></span><span class="o">%%</span><span class="nx">javascript</span>
+<span class="c1">// Replace &#39;your_csv_file.csv&#39; with the path to your actual CSV file</span>
+<span class="kd">var</span> <span class="nx">fileURL</span> <span class="o">=</span> <span class="s1">&#39;your_csv_file.csv&#39;</span><span class="p">;</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">loadCSVFile</span><span class="p">(</span><span class="nx">fileURL</span><span class="p">);</span>
 </pre></div>
 
     </div>
