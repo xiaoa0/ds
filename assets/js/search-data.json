@@ -83,6 +83,14 @@
   
 
   
+      ,"page8": {
+          "title": "",
+          "content": "&lt;!DOCTYPE html&gt; . CSV Viewer . .",
+          "url": "https://xiaoa0.github.io/ds/table.html",
+          "relUrl": "/table.html",
+          "date": ""
+      }
+      
   
 
   
@@ -95,7 +103,10 @@
   
 
   
-      ,"page12": {
+  
+
+  
+      ,"page13": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://xiaoa0.github.io/ds/robots.txt",
